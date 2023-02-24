@@ -1,9 +1,10 @@
+import TodoList from "./pages/TodoList";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      욥
-    </div>
+    <>
+      <TodoList />
+    </>
   );
 }
 
