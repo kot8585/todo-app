@@ -1,13 +1,15 @@
-import Calendar, { CalendarTileProperties, Detail } from 'react-calendar'
+import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 
 import DayButton from './DayButton';
 
-const DateTodo = () => {
+type Props = {
+  value: Date,
+  onChange: React.Dispatch<React.SetStateAction<Date>>,
+}
+const DateTodo = ({value, onChange}:Props) => {
 
-  const [value, onChange] = useState(new Date());
-  console.log('value', value);
   return (
     <>
     <div className="Sample__container">
@@ -16,8 +18,9 @@ const DateTodo = () => {
             next2Label={null}
             prev2Label={null}
             defaultView='month'
-            formatDay={(locale, date) => ''}
+            formatDay={() => ''}
             tileContent={({date}) => <DayButton date={date}/>}
+            onChange={onChange}
             value={value} />
         </main>
       </div>

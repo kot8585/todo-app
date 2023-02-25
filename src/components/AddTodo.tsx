@@ -3,8 +3,9 @@ import { TodoType } from '../pages/TodoList';
 
 type Props = {
   onAdd: (added: TodoType) => void,
+  value: Date,
 }
-const AddTodo = ({onAdd}: Props) => {
+const AddTodo = ({onAdd, value}: Props) => {
   const [text, setText] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +24,7 @@ const AddTodo = ({onAdd}: Props) => {
       todoId: 'todoId',
       status: 'active',
       text: text,
-      date: '2023-02-21',
+      date: value,
     })
 
     setText('');
