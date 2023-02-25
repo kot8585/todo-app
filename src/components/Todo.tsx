@@ -13,21 +13,6 @@ const Todo = ({todo, onDelete, onUpdate}: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState<TodoType['status']>(todo.status);
 
-  const handleClick = () => {
-    onDelete(todo);
-  }
-
-  const handleTextChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setText(e.target.value);
-  }
-
-  const handleUpdate = () => {
-    console.log('update가 불렸다');
-    const updated = {...todo, text:text};
-    
-    onUpdate(updated);
-  }
-
   const handleOnKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if(e.key === 'Enter') {
       if (inputRef.current != null) {
@@ -49,7 +34,6 @@ const Todo = ({todo, onDelete, onUpdate}: Props) => {
 
   return (
     <li key={todo.todoId}>
-      {/* 상태수정하기 */}
       <input 
         type="checkbox" 
         id='status' 
@@ -59,10 +43,10 @@ const Todo = ({todo, onDelete, onUpdate}: Props) => {
       <input type="text" 
         ref = {inputRef}
         value={text} 
-        onChange={handleTextChange} 
-        onBlur={handleUpdate} 
+        onChange={(e) => setText(e.target.value)} 
+        onBlur={()=>onUpdate({...todo, text:text})} 
         onKeyPress={handleOnKeyPress}/>
-      <button onClick={handleClick}><IoIosClose/></button>
+      <button onClick={()=>onDelete(todo)}><IoIosClose/></button>
     </li>
   )
 }
